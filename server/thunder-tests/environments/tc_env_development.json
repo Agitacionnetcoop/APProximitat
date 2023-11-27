@@ -1,0 +1,22 @@
+{
+    "_id": "0c8110c8-ba59-4302-ac55-020f7c649d63",
+    "name": "development",
+    "default": false,
+    "sortNum": 10000,
+    "created": "2023-07-18T07:57:39.615Z",
+    "modified": "2023-07-18T07:57:39.615Z",
+    "data": [
+        {
+            "name": "token",
+            "value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjY4LCJpc3MiOiJjb29hcHAiLCJhdWQiOiJjb29hcHAiLCJleHAiOjE3MDQ2MTgxNjYsImlhdCI6MTY5OTM0Nzc2Nn0.UokqO63dE6msATd3Ksz6hZVtrp70miVsKrcnstgNQ3jjaGmImvcHvKuE04PZBLcIn38ZPPN5HHe-dJEn8mGkVCBEw8MZYG2FYeMZjW9kAP9EQUS7S9Qink_HbWkn9ai-U4URrPCHUjrBCmK4FeeXH2Jd2xsts9wx6264wkGJunHmYqWBOm4VfQpyw6cqfwxuVdSCNbMlHmBKrXkoRGL_CQtA5o4tOYhhhdDFfiO5QioAHYoizTuViBPsYSVcMEj76ACwb2PlTG56YMnp_qzdRU6di_yZkfGWpG78ii8amaCBBYbkQfi4qpfpTEtrnr8AIiZbmQetvWsaCzItKrqZYQ"
+        },
+        {
+            "name": "oneSignal",
+            "value": "MjRiY2Q5MDgtN2E4NC00NmU4LTgzY2ItNGM1MTBkZTkyZGM2"
+        },
+        {
+            "name": "url",
+            "value": "http://admin.approximitat.cat:3000/"
+        }
+    ]
+}

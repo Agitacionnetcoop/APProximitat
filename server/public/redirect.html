@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>APProximitat</title>
+    <meta http-equiv="refresh" content="5" />
+    <meta property="og:title" content="APProximitat" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://admin.approximitat.cat" />
+    <meta
+      property="og:image"
+      content="https://admin.approximitat.cat/images/logo_rectangle.jpg"
+    />
+  </head>
+  <body>
+    <p>Redirect...</p>
+
+    <script>
+      // Function to redirect to the deep link
+      function redirectToDeepLink() {
+        // Get the 'to' parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search)
+        const queryString = urlParams.get('to')
+
+        if (queryString) {
+          // Split the 'to' parameter into type and code
+          const [type, code] = queryString.split('/')
+
+          // Replace 'approximitat://' with your actual deep link scheme
+
+          let deepLinkUrl
+          if (type === 'activity') {
+            deepLinkUrl = `approximitat://${type}/${code}`
+          } else {
+            deepLinkUrl = `approximitat://${type}?code=${code}`
+          }
+
+          // const deepLinkUrl = `approximitat://${type}?code=${code}`;
+
+          // Check if the user is on a mobile device
+          if (
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              navigator.userAgent
+            )
+          ) {
+            // Redirect to the app deep link
+            window.location.href = deepLinkUrl
+          } else {
+            // Display a message for desktop users
+            alert('This feature is available on mobile devices only.')
+          }
+        } else {
+          // Handle the case where the 'to' parameter is missing or invalid
+          console.error("Missing or invalid 'to' parameter in the URL.")
+        }
+      }
+
+      // Call the function when the page loads
+      window.onload = redirectToDeepLink
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "cooapp-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "syncWebApi": "node ./sync-webapi.js"
+  },
+  "dependencies": {
+    "@onesignal/node-onesignal": "^2.0.1-beta2",
+    "@sendgrid/mail": "^7.7.0",
+    "cookie-parser": "~1.4.4",
+    "dayjs": "^1.11.9",
+    "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^9.0.1",
+    "jwt-decode": "^3.1.2",
+    "morgan": "~1.9.1",
+    "mysql2": "^3.4.2",
+    "nanoid": "^3.3.6",
+    "node-fetch": "^2.7.0",
+    "shelljs": "^0.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

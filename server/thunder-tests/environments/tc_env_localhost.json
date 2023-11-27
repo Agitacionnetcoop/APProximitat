@@ -1,0 +1,22 @@
+{
+    "_id": "db738a4a-6dff-4506-bc10-61840cf76a72",
+    "name": "localhost",
+    "default": true,
+    "sortNum": 20000,
+    "created": "2023-11-14T13:56:12.749Z",
+    "modified": "2023-11-14T13:56:12.749Z",
+    "data": [
+        {
+            "name": "token",
+            "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg2LCJpc3MiOiJjb29hcHAiLCJhdWQiOiJjb29hcHAiLCJleHAiOjE3MDA1NjY2NzksImlhdCI6MTcwMDU2NjYxOX0.JtDj63_QaqS9nnRDKwT5i6OjhpPVJTdsKyYRW6N0XvgzCJiMTqI3rIt6irmWZduZPHkz2l0wq3xqwRB0u9Ein7JboRLzQNdzSQkUIM0uouJJ_v-ZLqENIfss290qmFVrts9KG6_sXXxoBPrIC7PpzEgLsFHH_6LqSEzREYmp_e3cEY4b9dabdnKBYwuAXIsPj5L67LqQwovJycjkebPz4FK7cggGoZvfXX7KOkt3cPh2AlWmhyY83kHMl24TQA2BkARE-JsMMXj0q8whTEPBaM914RaEaO2IwzqSMe0MLnc-xTf2eHDllftVfZaXBFxkvShN4UiRyC9msYxSIJOtsQ"
+        },
+        {
+            "name": "oneSignal",
+            "value": "MjRiY2Q5MDgtN2E4NC00NmU4LTgzY2ItNGM1MTBkZTkyZGM2"
+        },
+        {
+            "name": "url",
+            "value": "http://localhost:3000/"
+        }
+    ]
+}

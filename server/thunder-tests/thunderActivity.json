@@ -1,0 +1,35 @@
+[
+    {
+        "_id": "bff0568b-112b-440b-8c9d-42425a1adfef",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:3000/redirect",
+        "url": "http://localhost:3000/redirect",
+        "method": "GET",
+        "sortNum": 0,
+        "created": "2023-09-01T07:27:56.910Z",
+        "modified": "2023-09-01T07:27:56.910Z",
+        "headers": [],
+        "params": [],
+        "tests": []
+    },
+    {
+        "_id": "a1c2337d-a3c2-48a2-a919-f199dd676a2c",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:3000/shareActivity",
+        "url": "http://localhost:3000/shareActivity",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2023-09-01T07:27:56.910Z",
+        "modified": "2023-09-19T09:14:09.463Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"id\": \"2\"\n}",
+            "form": []
+        },
+        "tests": []
+    }
+]
