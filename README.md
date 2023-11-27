@@ -6,8 +6,7 @@ Code of the APProximity proximity trade application in react native
 - Preference is given to the visibility of those businesses that prioritize the sale of sustainable products and services. This free digitization tool for small businesses introduces them to a technological advance without relying on proprietary software or competing in spaces invaded by large commercial companies.
 - 
 ## Some screenshots:
-![APProximitat](https://a.fsdn.com/con/app/proj/rhinos/screenshots/screenshot2.png)
 ![APProximitat](https://approximitat.cat/imgs-github/IMG_2122.jpg.).
-
-![APProximitat](https://a.fsdn.com/con/app/proj/rhinos/screenshots/screenshot2.png)
-![APProximitat](https://a.fsdn.com/con/app/proj/rhinos/screenshots/screenshot3.png)
+![APProximitat](https://approximitat.cat/imgs-github/IMG_2123.jpg.).
+![APProximitat](https://approximitat.cat/imgs-github/IMG_2126.jpg.).
+![APProximitat](https://approximitat.cat/imgs-github/IMG_2122.jpg.).
