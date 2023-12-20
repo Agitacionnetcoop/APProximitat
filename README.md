@@ -1,5 +1,5 @@
 # APProximitat
-Code of the APProximity proximity trade application in react native
+Code of the APProximitat proximity trade application in react native
 ## The main features are: 
 - The application generates a space that allows users to browse, discover and choose, at the moment, among the different offers of more businesses, services and entities. In addition, it generates direct and interactive communication channels between businesses and potential consumers.
 - At the same time, it must be a process of improvement in digital communication that can become its own in the future with new strategic plans and new business models, since it is perfectly reproducible and scalable, without increasing the cost of the project significantly and therefore be bearable through the generated community.
