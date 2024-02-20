@@ -98,8 +98,8 @@ android {
         applicationId "com.cooapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 111
-        versionName "1.1"
+        versionCode 1019
+        versionName "1.0.1"
     }
 
     splits {
@@ -169,6 +169,17 @@ dependencies {
 
     // OneSignal SDK
     implementation 'com.onesignal:OneSignal:[5.0.0, 5.99.99]'
+
+      //Exclude conflicting dependencies
+    implementation(project(':react-native-onesignal')){
+        exclude group: 'com.google.android.gms'
+    }
+    implementation(project(':react-native-maps')){
+        exclude group: 'com.google.android.gms'
+    }
+    implementation 'com.google.android.gms:play-services-base:18.0.1'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
