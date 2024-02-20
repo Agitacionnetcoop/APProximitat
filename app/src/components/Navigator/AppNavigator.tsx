@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Platform, Text } from 'react-native'
+import { Text } from 'react-native'
 import { LinkingOptions, NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {
@@ -94,6 +94,7 @@ const Shops = () => {
         name="ActivityDetail"
         component={ActivityDetailScreen}
       />
+      <ShopsStack.Screen name="Purchases" component={PurchasesScreen} />
     </ShopsStack.Navigator>
   )
 }
@@ -123,6 +124,7 @@ const Map = () => {
       />
       <MapStack.Screen name="ShopDetail" component={ShopDetailScreen} />
       <MapStack.Screen name="Search" component={SearchResultScreen} />
+      <MapStack.Screen name="Purchases" component={PurchasesScreen} />
     </MapStack.Navigator>
   )
 }
@@ -133,7 +135,7 @@ const Activities = () => {
       screenOptions={({ route }) => ({
         header: () => (
           <Header
-            backButton
+            backButton={route.name !== 'AllActivities'}
             shareButton={
               ['ActivityDetail', 'ShopDetail'].includes(route.name) &&
               route.params?.id
@@ -209,7 +211,6 @@ const Profile = () => {
 
 const MainTab = () => {
   const { literals } = useStore.getState()
-  const extraPadding = Platform.OS === 'android' ? { paddingBottom: '5%' } : {}
   return (
     <Tab.Navigator
       screenOptions={({ route }) => {
@@ -244,7 +245,7 @@ const MainTab = () => {
               </Text>
             )
           },
-          tabBarStyle: { ...tabBarStyle, ...extraPadding },
+          tabBarStyle: { ...tabBarStyle },
           headerShown: false,
         }
       }}

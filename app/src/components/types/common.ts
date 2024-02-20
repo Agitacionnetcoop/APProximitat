@@ -29,6 +29,8 @@ export type TagItem = {
 export type FilterItem = {
   id: number
   text: TranslatableText
+  url?: string | null
+  icon?: string | undefined
 }
 
 export type FilterOptions = {

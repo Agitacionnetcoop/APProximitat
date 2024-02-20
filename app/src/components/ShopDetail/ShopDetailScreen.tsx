@@ -25,14 +25,14 @@ import { useNavigation } from '@react-navigation/native'
 const ShopDetailScreen = ({ route }: ShopDetailProps) => {
   const navigation = useNavigation<NavigationType>()
   const { id } = route.params
-  const { literals } = useStore()
+  const { literals, user } = useStore()
   const [data, setData] = useState<Shop | undefined>(undefined)
   const [loading, setLoading] = useState<boolean>(false)
   const [shopStatus, setShopStatus] = useState<ShopStatus>()
 
   const loadData = async (id: number) => {
     setLoading(true)
-    const response = await getShop({ id })
+    const response = await getShop({ id, userId: user?.id || null })
     if (response) {
       const status = getShopOpenStatus(literals, response.schedule)
       setShopStatus(status)

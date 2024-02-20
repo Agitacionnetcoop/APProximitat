@@ -9,6 +9,8 @@ import { useStore } from '../../store/useStore'
 import { lang } from '../../helpers/language'
 import { capitalize } from '../../helpers/capitalize'
 import { FiltersProps } from '../types'
+import { Linking } from 'react-native'
+import FastImage from 'react-native-fast-image'
 
 const FiltersScreen = ({ navigation, route }: FiltersProps) => {
   const { firstConfig } = route.params
@@ -70,7 +72,24 @@ const FiltersScreen = ({ navigation, route }: FiltersProps) => {
           <Options>
             {filterOptions.sustainability.map(option => (
               <Option key={option.id}>
-                <Label>{capitalize(lang(option.text))}</Label>
+                {option.url ? (
+                  <LabelLink
+                    onPress={() => Linking.openURL(option.url as string)}
+                  >
+                    <IconContainer>
+                      <FastImage
+                        source={{ uri: option.icon }}
+                        style={{ width: 15, height: 15 }}
+                        resizeMode="contain"
+                      />
+                    </IconContainer>
+                    <Label url={option.url}>
+                      {capitalize(lang(option.text))}
+                    </Label>
+                  </LabelLink>
+                ) : (
+                  <Label>{capitalize(lang(option.text))}</Label>
+                )}
                 <Switch
                   renderActiveText={false}
                   renderInActiveText={false}
@@ -164,7 +183,7 @@ const Subtitle = styled.Text`
   color: ${theme.colors.black};
   padding-bottom: ${theme.spacing[2]};
 `
-const Label = styled.Text<{ firstConfig?: boolean }>`
+const Label = styled.Text<{ firstConfig?: boolean; url?: string }>`
   font-family: ${theme.fonts.notoSansRegular};
   font-size: ${({ firstConfig }) =>
     firstConfig ? theme.fonts.size[22] : theme.fonts.size[16]};
@@ -172,6 +191,17 @@ const Label = styled.Text<{ firstConfig?: boolean }>`
     firstConfig ? theme.fonts.height[28] : theme.fonts.height[18]};
   color: ${theme.colors.black};
   padding-right: ${theme.spacing[2]};
+  text-decoration: ${({ url }) => (url ? 'underline' : '')};
+`
+const LabelLink = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: -19px;
+`
+const IconContainer = styled.View`
+  flex: none;
+  margin-right: ${theme.spacing[1]};
 `
 const Options = styled.View`
   display: flex;

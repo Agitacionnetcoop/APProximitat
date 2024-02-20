@@ -19,7 +19,7 @@ const LoyaltySection = ({ offer, literals }: Props) => {
       <SectionTitle text={offer.title} />
       <Text>{offer.description}</Text>
       <LoyaltyContainer show={offer.max_purchases > 0}>
-        {offer.max_purchases > 0 && typeof offer.user_purchases === 'number' ? (
+        {offer.max_purchases > 0 ? (
           <Loyalty
             number={offer.user_purchases}
             maxNumber={offer.max_purchases}

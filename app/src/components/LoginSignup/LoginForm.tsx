@@ -10,25 +10,36 @@ import { login } from '../../services/user.services'
 import { LoginSchema } from '../../helpers/formValidations'
 import { lang } from '../../helpers/language'
 import FormError from '../common/FormError'
+import { User } from '../types'
+import { OneSignal } from 'react-native-onesignal'
 
 const LoginForm = ({
   literals,
   toggleFormCallback,
   onSubmitCallback,
+  defaultEmail,
 }: {
   literals: Record<string, string>
   toggleFormCallback: () => void
   onSubmitCallback: () => void
+  defaultEmail: string | undefined
 }) => {
-  const { setUser } = useStore()
-  const { user } = useStore.getState()
+  const { setUser, language } = useStore()
   const [formError, setFormError] = useState<string | undefined>(undefined)
+
+  const initNotifications = (user: User) => {
+    OneSignal.login(`${user.id}`)
+    OneSignal.User.addAlias('external_id', `${user.id}`)
+    OneSignal.User.setLanguage(language)
+    OneSignal.setConsentGiven(true)
+    onSubmitCallback()
+  }
 
   const onSubmit = async (formValues: { email: string }) => {
     const response = await login(formValues)
     if (response.user) {
       setUser(response.user)
-      onSubmitCallback()
+      initNotifications(response.user)
     } else {
       if (response.message === 'No user found') {
         setFormError(lang(literals[64]))
@@ -46,7 +57,7 @@ const LoginForm = ({
 
   return (
     <Formik
-      initialValues={{ email: user?.email || '' }}
+      initialValues={{ email: defaultEmail || '' }}
       validationSchema={LoginSchema(literals)}
       onSubmit={values => onSubmit({ email: values.email })}
       validateOnBlur={false}

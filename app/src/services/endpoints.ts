@@ -18,6 +18,8 @@ const endpoints = {
   favorites: `${API_URL}favorites`,
   purchases: `${API_URL}purchases`,
   notifications: `${API_URL}listNotifications`,
+  readNotifications: `${API_URL}readNotifications`,
+  checkNotifications: `${API_URL}getUnreadNotificationsNumber`,
   deleteAccount: `${API_URL}deleteAccount`,
 }
 

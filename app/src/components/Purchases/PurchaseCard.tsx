@@ -10,6 +10,7 @@ import Loyalty from './Loyalty'
 import ButtonRounded from '../common/ButtonRounded'
 import { useNavigation } from '@react-navigation/native'
 import { useStore } from '../../store/useStore'
+import { TouchableOpacity } from 'react-native'
 
 type Props = {
   item: Purchase
@@ -27,7 +28,11 @@ const PurchaseCard: React.FC<Props> = ({ item, buttonLabel }) => {
         shopId={item.id}
       />
       <Content>
-        <ShopLogoTitle title={item.name} ellipsis />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ShopDetail', { id: item.id })}
+        >
+          <ShopLogoTitle title={item.name} ellipsis />
+        </TouchableOpacity>
         {item.offer && item.offer.max_purchases && (
           <>
             <Subtitle>{item.offer.title}</Subtitle>

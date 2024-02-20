@@ -15,6 +15,7 @@ import { PersonalInfoSchema } from '../../helpers/formValidations'
 import { lang } from '../../helpers/language'
 import Cta from '../common/Cta'
 import { ConfirmationAlert, SuccessAlert } from '../../services/alerts'
+import { OneSignal } from 'react-native-onesignal'
 
 const PersonalInfoScreen = ({ navigation, route }: PersonalInfoProps) => {
   const { literals, user } = useStore.getState()
@@ -50,6 +51,7 @@ const PersonalInfoScreen = ({ navigation, route }: PersonalInfoProps) => {
             setToken('')
             setFavorites([])
             setFilters({ categories: [], sustainability: [] })
+            OneSignal.logout()
             navigation.navigate('LoginSignup', { formType: 'signup' })
           })
         }

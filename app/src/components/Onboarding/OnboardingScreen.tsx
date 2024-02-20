@@ -16,6 +16,7 @@ import { useSwipe } from '../../hooks/useSwipe'
 import { WelcomeProps } from '../types'
 import resolver from '../../helpers/resolver'
 import { useStore } from '../../store/useStore'
+import { StatusBar } from 'react-native'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -58,13 +59,19 @@ const OnboardingScreen = ({ navigation }: WelcomeProps) => {
 
   function onSwipeLeft() {
     if (currentSlide === 2 && Platform.OS === 'android') {
-      navigation.navigate('Filters', { firstConfig: true })
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Filters', params: { firstConfig: true } }],
+      })
     }
   }
 
   function onSwipeRight() {
     if (currentSlide === 2 && Platform.OS === 'ios') {
-      navigation.navigate('Filters', { firstConfig: true })
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Filters', params: { firstConfig: true } }],
+      })
     }
   }
 
@@ -77,6 +84,7 @@ const OnboardingScreen = ({ navigation }: WelcomeProps) => {
         height: SCREEN_HEIGHT,
       }}
     >
+      <StatusBar barStyle={'dark-content'} />
       <ScrollView
         horizontal
         onScroll={e => handleCurrentSlide(e)}
@@ -104,7 +112,7 @@ const OnboardingScreen = ({ navigation }: WelcomeProps) => {
                 >
                   <Video
                     source={source}
-                    ref={videoRef} // ref?
+                    ref={videoRef}
                     style={{
                       height: SCREEN_WIDTH * 0.9 * 0.825,
                       width: SCREEN_WIDTH * 0.9,

@@ -31,6 +31,7 @@ const AuthForm = ({
     if (response.token) {
       setUser(response.user)
       setToken(response.token)
+      OneSignal.User.addAlias('external_id', `${user.id}`)
       onSubmitCallback()
     } else {
       if (response.message === 'Invalid code or email') {

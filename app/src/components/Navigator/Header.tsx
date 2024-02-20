@@ -8,6 +8,7 @@ import IconButton from '../common/IconButton'
 import Icon from '../common/Icon'
 import ShareButton from '../common/ShareButton'
 import { NavigationType } from '../types'
+import { useNotifications } from '../../store/useStore'
 
 type Header = {
   searchBar?: boolean
@@ -26,6 +27,9 @@ const Header = ({
 }: Header) => {
   const insets = useSafeAreaInsets()
   const navigation = useNavigation<NavigationType>()
+  const { notifications } = useNotifications(({ notifications }) => ({
+    notifications,
+  }))
 
   return (
     <Container>
@@ -59,7 +63,7 @@ const Header = ({
               color={theme.colors.black}
               iconHeight={23}
               calculateWidth
-              // notification
+              notification={notifications > 0}
               onPress={() => navigation.navigate('Notifications')}
             />
             <IconButton

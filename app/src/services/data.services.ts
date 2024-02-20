@@ -43,9 +43,15 @@ export const getCategories = async ({
   }
 }
 
-export const getShop = async ({ id }: { id: number }) => {
+export const getShop = async ({
+  id,
+  userId,
+}: {
+  id: number
+  userId?: number | null
+}) => {
   try {
-    const response = await doFetch('POST', endpoints.shop, { id })
+    const response = await doFetch('POST', endpoints.shop, { id, userId })
     const data = await response.json()
     if (data?.shop) {
       return data.shop

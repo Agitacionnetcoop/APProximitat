@@ -212,6 +212,7 @@ export const tabBarStyle: ViewStyle = {
   width: '100%',
   height: 84,
   zIndex: 0,
+  paddingBottom: '5%',
 }
 export const tabBarLabelStyle: TextStyle = {
   fontFamily: theme.fonts.notoSansRegular,

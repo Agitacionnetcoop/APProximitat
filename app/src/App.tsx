@@ -14,9 +14,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import AppNavigator from './components/Navigator'
 import { getLiterals } from './services/data.services'
 
-import { useStore } from './store/useStore'
+import { useNotifications, useStore } from './store/useStore'
 import { translateAll } from './helpers/language'
-import { getFavorites } from './services/user.services'
+import { checkNotifications, getFavorites } from './services/user.services'
 import Loader from './components/common/Loader'
 import { View, NativeModules, Platform } from 'react-native'
 import { ErrorAlert } from './services/alerts'
@@ -39,7 +39,10 @@ const App = () => {
     setLanguage,
     language,
   } = useStore()
-  const { literals } = useStore.getState()
+  const { literals, user } = useStore.getState()
+  const { setNotifications } = useNotifications(({ setNotifications }) => ({
+    setNotifications,
+  }))
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -90,9 +93,28 @@ const App = () => {
     }
   }
 
+  const initNotifiactionService = () => {
+    const hasNotificationsPermission = OneSignal.Notifications.hasPermission()
+    if (user?.id) {
+      OneSignal.login(`${user.id}`)
+      if (hasNotificationsPermission) {
+        OneSignal.User.addAlias('external_id', `${user.id}`)
+      }
+    }
+  }
+
+  const checkNewNotifications = async () => {
+    if (user?.id) {
+      const newNotifications = await checkNotifications(user.id)
+      if (newNotifications) {
+        setNotifications(newNotifications.unreadNumber)
+      }
+    }
+  }
+
   useEffect(() => {
+    OneSignal.setConsentRequired(Platform.OS === 'android' ? false : true)
     OneSignal.initialize(ONESIGNAL_APP_ID)
-    OneSignal.setConsentRequired(true)
     getDeviceLanguage()
   }, [])
 
@@ -103,6 +125,8 @@ const App = () => {
         nextAppState === 'active'
       ) {
         console.log('App has come to the foreground!')
+        initNotifiactionService()
+        checkNewNotifications()
       } else {
         console.log('Init App')
         if (error) {
@@ -123,6 +147,7 @@ const App = () => {
   useEffect(() => {
     if (token) {
       initUserFavorites()
+      checkNewNotifications()
     }
   }, [token])
 

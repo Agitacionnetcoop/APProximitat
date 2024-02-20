@@ -46,7 +46,7 @@ const NotificationCard = ({
         <ButtonContainer>
           <ButtonRounded
             label={literals[31]}
-            onPress={() => navigation.navigate('ShopDetail', { id: item.id })}
+            onPress={() => navigation.navigate('Purchases')}
           />
         </ButtonContainer>
       </Content>

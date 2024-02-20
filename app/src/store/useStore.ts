@@ -33,6 +33,11 @@ interface SearchState {
   setSearch: (search: string) => void
 }
 
+interface NotificationsState {
+  notifications: number
+  setNotifications: (notifications: number) => void
+}
+
 export const useStore = create<StoreState, [['zustand/persist', StoreState]]>(
   persist(
     (set, get) => ({
@@ -62,4 +67,9 @@ export const useStore = create<StoreState, [['zustand/persist', StoreState]]>(
 export const useSearch = create<SearchState>((set, get) => ({
   search: '',
   setSearch: search => set(() => ({ search })),
+}))
+
+export const useNotifications = create<NotificationsState>((set, get) => ({
+  notifications: 0,
+  setNotifications: notifications => set(() => ({ notifications })),
 }))

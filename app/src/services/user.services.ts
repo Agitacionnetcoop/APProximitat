@@ -148,6 +148,46 @@ export const getNotifications = async () => {
   }
 }
 
+export const readNotifications = async (notificationsId: number[]) => {
+  const { token } = useStore.getState()
+  try {
+    const response = await doFetch(
+      'POST',
+      endpoints.readNotifications,
+      { notificationsId: notificationsId },
+      token,
+    )
+    const data = await response.json()
+    if (data) {
+      return data
+    } else {
+      ErrorAlert(data.message)
+    }
+  } catch (err: any) {
+    ErrorAlert(`${err as string}`)
+  }
+}
+
+export const checkNotifications = async (id: number) => {
+  const { token } = useStore.getState()
+  try {
+    const response = await doFetch(
+      'POST',
+      endpoints.checkNotifications,
+      { userId: id },
+      token,
+    )
+    const data = await response.json()
+    if (data) {
+      return data
+    } else {
+      ErrorAlert(data.message)
+    }
+  } catch (err: any) {
+    ErrorAlert(`${err as string}`)
+  }
+}
+
 export const deleteAccount = async () => {
   const { token } = useStore.getState()
   try {

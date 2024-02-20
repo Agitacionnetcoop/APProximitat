@@ -31,6 +31,7 @@ const resolver = {
     support: require('../assets/icons/support.png'),
     noResults: require('../assets/icons/no_results.png'),
     cross: require('../assets/icons/cross.png'),
+    marker: require('../assets/icons/marker.png'),
   },
   not_found: require('../assets/icons/notFound.png'),
   videos: {

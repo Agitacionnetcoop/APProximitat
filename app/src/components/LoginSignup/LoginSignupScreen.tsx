@@ -23,6 +23,7 @@ const LoginSignupScreen = ({ navigation, route }: LoginSignupProps) => {
   const { literals } = useStore.getState()
   const insets = useSafeAreaInsets()
   const [currentForm, setCurrentForm] = useState<'login' | 'signup'>(formType)
+  const [signedEmail, setSignedEmail] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     setCurrentForm(formType)
@@ -66,7 +67,12 @@ const LoginSignupScreen = ({ navigation, route }: LoginSignupProps) => {
                 <SignupForm
                   literals={literals}
                   toggleFormCallback={() => setCurrentForm('login')}
-                  onSubmitCallback={() => setCurrentForm('login')}
+                  onSubmitCallback={email => {
+                    if (email) {
+                      setSignedEmail(email)
+                    }
+                    setCurrentForm('login')
+                  }}
                 />
               ) : (
                 <LoginForm
@@ -75,6 +81,7 @@ const LoginSignupScreen = ({ navigation, route }: LoginSignupProps) => {
                   onSubmitCallback={() =>
                     navigation.navigate('Authentication', { code: undefined })
                   }
+                  defaultEmail={signedEmail}
                 />
               )}
             </FormContainer>

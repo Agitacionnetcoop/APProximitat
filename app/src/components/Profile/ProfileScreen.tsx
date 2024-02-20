@@ -8,6 +8,7 @@ import ButtonRounded from '../common/ButtonRounded'
 import { useStore } from '../../store/useStore'
 import { ProfileOptionsProps } from '../types'
 import { Linking } from 'react-native'
+import { OneSignal } from 'react-native-onesignal'
 
 const ProfileScreen = ({ navigation }: ProfileOptionsProps) => {
   const { literals, user } = useStore.getState()
@@ -20,9 +21,13 @@ const ProfileScreen = ({ navigation }: ProfileOptionsProps) => {
     setUser({})
     setToken('')
     setFavorites([])
+    OneSignal.logout()
 
     setTimeout(() => {
-      navigation.navigate('LoginSignup', { formType: 'login' })
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'LoginSignup', params: { formType: 'login' } }],
+      })
       setLoading(false)
     }, 500)
   }

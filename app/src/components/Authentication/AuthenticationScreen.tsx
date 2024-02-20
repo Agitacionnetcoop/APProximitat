@@ -65,7 +65,12 @@ const AuthenticationScreen = ({ navigation, route }: AuthenticationProps) => {
                 <AuthForm
                   code={authCode}
                   literals={literals}
-                  onSubmitCallback={() => navigation.navigate('ProfileOptions')}
+                  onSubmitCallback={() =>
+                    navigation.reset({
+                      index: 0,
+                      routes: [{ name: 'ProfileOptions' }],
+                    })
+                  }
                 />
               </>
               <Cta

@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import IconButton from './IconButton'
 import { NavigationType } from '../types'
+import { StatusBar } from 'react-native'
 
 const OverlayContainer = ({
   children,
@@ -46,16 +47,11 @@ const OverlayContainer = ({
       showsVerticalScrollIndicator={false}
       ref={containerRef}
     >
+      <StatusBar barStyle={'dark-content'} />
       <Head>
         {closeButton && (
           <IconButton
-            onPress={
-              onClose
-                ? onClose
-                : () => {
-                    navigation.goBack()
-                  }
-            }
+            onPress={onClose ? onClose : () => navigation.goBack()}
             icon="close"
             iconHeight={31}
             calculateWidth

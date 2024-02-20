@@ -28,12 +28,14 @@ export type HomeTabStackParamList = {
   ShopDetail: { id: number }
   Search: { searchValue: string }
   ActivityDetail: { id: number }
+  Purchases: undefined
 }
 
 export type MapTabStackParamList = {
   ShopsMap: { id?: number | null; lat?: number; lng?: number }
   ShopDetail: { id: number }
   Search: { searchValue: string }
+  Purchases: undefined
 }
 
 export type ActivityTabStackParamList = {

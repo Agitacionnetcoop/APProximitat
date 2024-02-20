@@ -10,8 +10,6 @@ import { useStore } from '../../store/useStore'
 import { SignupSchema } from '../../helpers/formValidations'
 import FormError from '../common/FormError'
 import { lang } from '../../helpers/language'
-import { OneSignal } from 'react-native-onesignal'
-import { User } from '../types'
 
 const SignupForm = ({
   literals,
@@ -20,24 +18,16 @@ const SignupForm = ({
 }: {
   literals: Record<string, string>
   toggleFormCallback: () => void
-  onSubmitCallback: (params: { email: string }) => void
+  onSubmitCallback: (email: string) => void
 }) => {
   const { setUser } = useStore()
-  const { language } = useStore.getState()
   const [formError, setFormError] = useState<string | undefined>(undefined)
-
-  const initNotifications = (user: User) => {
-    OneSignal.login(`${user.id}`)
-    OneSignal.User.setLanguage(language)
-    OneSignal.setConsentGiven(true)
-    onSubmitCallback({ email: user.email })
-  }
 
   const onSubmit = async (formValues: { name: string; email: string }) => {
     const response = await register(formValues)
     if (response.user) {
       setUser(response.user)
-      initNotifications(response.user)
+      onSubmitCallback(formValues.email)
     } else {
       if (response.message === 'User already exists') {
         setFormError(lang(literals[63]))

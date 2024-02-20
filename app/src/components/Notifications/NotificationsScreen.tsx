@@ -7,19 +7,28 @@ import { Dimensions, ScrollView } from 'react-native'
 import OverlayContainer from '../common/OverlayContainer'
 import NotificationCard from './NotificationCard'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useStore } from '../../store/useStore'
+import { useNotifications, useStore } from '../../store/useStore'
 import { NavigationType, Notification, NotificationsProps } from '../types'
 import { lang } from '../../helpers/language'
-import { getNotifications } from '../../services/user.services'
+import {
+  checkNotifications,
+  getNotifications,
+  readNotifications,
+} from '../../services/user.services'
 import Loader from '../common/Loader'
 import { useNavigation } from '@react-navigation/native'
 
 const NotificationsScreen = ({}: NotificationsProps) => {
   const navigation = useNavigation<NavigationType>()
-  const { literals, token } = useStore.getState()
+  const { literals, token, user } = useStore.getState()
+  const { setNotifications } = useNotifications(({ setNotifications }) => ({
+    setNotifications,
+  }))
   const insets = useSafeAreaInsets()
   const [data, setData] = useState<Notification[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [readItems, setReadItems] = useState<Notification[]>([])
+  const [unreadItems, setUnreadItems] = useState<Notification[]>([])
 
   const SCREEN_HEIGHT =
     (Dimensions.get('window').height -
@@ -35,6 +44,22 @@ const NotificationsScreen = ({}: NotificationsProps) => {
       setData(response)
     }
     setLoading(false)
+  }
+
+  const handleReadNotification = async () => {
+    const ids = unreadItems.map(i => i.notiId)
+    if (ids.length > 0) {
+      const response = await readNotifications(ids)
+      if (response) {
+        const update = await checkNotifications(user.id)
+        if (update) {
+          setNotifications(update.unreadNumber)
+          navigation.goBack()
+        }
+      }
+    } else {
+      navigation.goBack()
+    }
   }
 
   useEffect(() => {
@@ -53,8 +78,15 @@ const NotificationsScreen = ({}: NotificationsProps) => {
     }
   }, [token])
 
+  useEffect(() => {
+    const unread = [...data].filter(i => i.read === 0)
+    const read = [...data].filter(i => i.read === 1)
+    setUnreadItems(unread)
+    setReadItems(read)
+  }, [data])
+
   return (
-    <OverlayContainer>
+    <OverlayContainer onClose={() => handleReadNotification()}>
       {loading ? (
         <Loader fullScreen />
       ) : (
@@ -73,10 +105,15 @@ const NotificationsScreen = ({}: NotificationsProps) => {
               ) : (
                 <>
                   <Content>
-                    {data.map((item, index) => {
-                      if (index === 0) {
+                    {unreadItems.length === 0 ? (
+                      <EmptyContainer height={60}>
+                        <EmptyMessage>{literals[69]}</EmptyMessage>
+                      </EmptyContainer>
+                    ) : (
+                      unreadItems.map((item, index) => {
                         return (
-                          <Fragment key={item.id}>
+                          <Fragment key={item.notiId}>
+                            {index !== 0 && <ItemSeparator />}
                             <Description>
                               {`${literals[29]} `}
                               <Bold>{item.name}</Bold>
@@ -85,23 +122,27 @@ const NotificationsScreen = ({}: NotificationsProps) => {
                             <NotificationCard item={item} literals={literals} />
                           </Fragment>
                         )
-                      }
-                    })}
+                      })
+                    )}
                   </Content>
                   <Separator />
                   <Content>
                     <Subtitle>{lang(literals[41])}</Subtitle>
-                    {data.map((item, index) => {
-                      if (index > 0) {
+                    {readItems.length === 0 ? (
+                      <EmptyContainer height={60}>
+                        <EmptyMessage>{literals[69]}</EmptyMessage>
+                      </EmptyContainer>
+                    ) : (
+                      readItems.map(item => {
                         return (
                           <NotificationCard
-                            key={item.id}
+                            key={item.notiId}
                             item={item}
                             literals={literals}
                           />
                         )
-                      }
-                    })}
+                      })
+                    )}
                   </Content>
                 </>
               )}
@@ -148,6 +189,12 @@ const Separator = styled.View`
   height: 1px;
   width: 100%;
   margin-vertical: ${theme.spacing[3]};
+`
+const ItemSeparator = styled.View`
+  background-color: ${theme.colors.grayD9D9D9};
+  height: 1px;
+  width: 100%;
+  margin-vertical: ${theme.spacing[2]};
 `
 const EmptyContainer = styled.View<{ height: number }>`
   height: ${({ height }) => height}px;
