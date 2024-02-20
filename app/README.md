@@ -47,7 +47,12 @@ Follow the [iOS Push Certificate](https://documentation.onesignal.com/docs/gener
 
 Follow the [Firebase credentials](https://documentation.onesignal.com/docs/generate-firebase-credentials) Setup guide to generate a Firebase Cloud Messaging API Credentials.
 
-#### 4. Environtment variables
+#### 4. React Native Maps Configuration
+
+To set up React Native Maps, follow the [installation instructions](https://github.com/react-native-maps/react-native-maps/blob/master/docs/installation.md) on the [Github repository](https://github.com/react-native-maps/react-native-maps).
+Android uses Google Maps, which requires you to obtain an [API key for the Android SDK](https://developers.google.com/maps/documentation/android-sdk/get-api-key). iOS uses native Apple Maps.
+
+#### 5. Environtment variables
 
 You will need a `.env` file in the root folder of the project with the following variables:
 
@@ -56,7 +61,7 @@ API_URL=
 ONESIGNAL_APP_ID=
 ```
 
-#### 5. Run on iOS
+#### 6. Run on iOS
 
 Go back to the root folder (`app`) and type the following command on your terminal to open iOS simulator:
 
@@ -66,7 +71,7 @@ npx react-native run-ios
 
 This command will build the iOS app and run it in the iOS simulator. Make sure you have Xcode installed and configured properly.
 
-#### 6. Run on Android
+#### 7. Run on Android
 
 Ensure that you have an Android Virtual Device (AVD) configured in Android Studio. Type the following command on your terminal to open iOS simulator:
 
